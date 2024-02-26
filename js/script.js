@@ -1,122 +1,160 @@
-$(window).scroll(function(){
-	let scrTop=$('html').scrollTop()
-	if (scrTop > 50) {
-		$('.header').addClass('fixed')
-	} else{
-		$('.header').removeClass('fixed')
-	}
-}) //window.scroll end
+//AOS
+AOS.init();
 
-/*m_menu script*/
+//sub_gnb
+$('.sub_gnb, .sub_gnb_bg').hide();
+$('.gnb>li').mouseenter(function(){
+  $('.sub_gnb_bg').stop().slideDown();
+  $(this).children('.sub_gnb').stop().fadeIn();
+});
+$('.gnb>li').mouseleave(function(){
+  $('.sub_gnb_bg').stop().slideUp();
+  $(this).children('.sub_gnb').stop().fadeOut();
+});
 
-$('.m_sub').hide()
-$('.m_menu>li').click(function(){
-	$(this).toggleClass('active');
-	$(this).siblings().removeClass('active');
-	$(this).children('.m_sub').slideToggle();
-	$(this).siblings().children('.m_sub').slideUp();
-})
+//m_gnb
+$('.m_sub').hide();
+$('.m_gnb>li').click(function(){
+  $(this).children('.m_sub').stop().slideToggle();
+  $(this).siblings().children('.m_sub').stop().slideUp();
+  $(this).toggleClass('m_gnb_active');
+  $(this).siblings().removeClass('m_gnb_active');
+});
 
-$('.m_container').hide();
+//m_menu
+$('.m_bg').hide();
+$('.close_btn').click(function(){
+  $('.m_bg').hide();
+});
+$('.m_menu').click(function(){
+  $('.m_bg').show();
+});
 
-$('.m_nav').css({'margin-right':'-350px'})
+//main swiper
+let mainSwiper = new Swiper('.main .swiper-container',{
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false,
+  },
+  effect: 'fade',
+  speed: 1000,
+  loop: true,
+  navigation:{
+    prevEl:'.main .swiper-button-prev',
+    nextEl:'.main .swiper-button-next',
+  },
+  pagination:{
+    el: '.main .swiper-pagination',
+    type: 'fraction',//숫자로 표기
+  },
+});
 
-$('.m_close').click(function(){
-	$('.m_container').fadeOut();
-	$('.m_nav').animate({'marginRight':'-350px'},500)
-})
+//main_navi play-pause
+$('.main .play_btn').hide();
+$('.main .pause_btn').click(function(){
+  $('.main .play_btn').show();
+  $('.main .pause_btn').hide();
+  mainSwiper.autoplay.stop();
+});
+$('.main .play_btn').click(function(){
+  $('.main .play_btn').hide();
+  $('.main .pause_btn').show();
+  mainSwiper.autoplay.start();
+});
 
-$('.m_btn').click(function(){
-	$('.m_container').fadeIn();
-	$('.m_nav').animate({'marginRight':'0px'},500)
-})
+//s2_wrap > swiper1
+let swiper1 = new Swiper('.s2 .swiper1',{
+  effect: 'fade',
+  autoplay: {
+    delay:4000,
+    disableOnInteraction:false,
+  },
+  loop:true,
+  pagination:{
+    el:'.s2 .swiper-pagination',
+    type: 'fraction',
+  },
+  navigation:{
+    prevEl:'.s2 .swiper-button-prev',
+    nextEl:'.s2 .swiper-button-next',
+  },
+  loopedSlides : 3,
+  touchRatio:0, //swiper의 드래그 기능 막기
+});
 
-$('.sub,.sub_bg').hide();
-$('.menu>li').mouseover(function(){
-	$('.sub,.sub_bg').stop().show();
-})
-$('.menu').mouseout(function(){
-	$('.sub,.sub_bg').stop().hide();
-})
+//s2_wrap > swiper2
+let swiper2 = new Swiper('.s2 .swiper2', {
+  autoplay:{
+    delay:4000,
+    disableOnInteraction: false,
+  },
+  loop:true,
+  pagination:{
+    el:'.s2 .swiper-pagination',
+    type: 'fraction',
+  },
+  navigation:{
+    prevEl:'.s2 .swiper-button-prev',
+    nextEl:'.s2 .swiper-button-next',
+  },
+  slidesPerView: 'auto',
+  spaceBetween: 60,
 
-const main=new Swiper('.main',{
-	navigator: {
-		nextE1: '.main_next',
-		prevE1: '.main_prev',
-	},
-	loop:true,
-	autoplay:{
-		delay: 2500, //지연시간
-		disableOnInteraction: false,
-		},
-	pagination:{el:'.main .swiper-pagination', clickable:true},
-})//main안에 있는 swiper-pagination을 가르키며 동그라미 형태로 나타남
+  loopedSlides : 3,
+});
 
-$('.play').hide();
-$('.pause').click(function(){
-	$('.pause').hide();
-	$('.play').show();
-	main.autoplay.pause();
-})
-
-$('.play').click(function(){
-	$('.play').hide();
-	$('.pause').show();
-	main.autoplay.start();
-})
-
-
-/*box1 slide*/
-const box1=new Swiper('.box1',{
-			loop:true,
-			autoplay:{
-			delay:3000,
-			disableOnInteraction: false,
-		},
-      pagination: {
-        el: ".box1 .swiper-pagination",
-        type: "fraction",
-      },
-			navigation:{
-				prevEl:'.box1prev', nextEl:'.box1next'
-			}
-})
+//s2swiper conact
+//swiper1.controller.control = swiper2;
+swiper2.controller.control = swiper1;
 
 
-$('.box1play').hide();
-$('.box1pause').click(function(){
-	$('.box1pause').hide();
-	$('.box1play').show();
-	box1.autoplay.pause();
-})
+$('.s2 .play_btn').hide();
+$('.s2 .pause_btn').click(function(){
+  $('.s2 .pause_btn').hide();
+  $('.s2 .play_btn').show();
+  swiper1.autoplay.stop();
+  swiper2.autoplay.stop();
+});
 
-$('.box1play').click(function(){
-	$('.box1play').hide();
-	$('.box1pause').show();
-	box1.autoplay.start();
-})
+$('.s2 .play_btn').click(function(){
+  $('.s2 .play_btn').hide();
+  $('.s2 .pause_btn').show();
+  swiper1.autoplay.start();
+  swiper2.autoplay.start();
+});
 
 
-$('.notice2').hide();
-$('.tab_title>li:nth-child(2)').click(function(){
-	$(this).addClass('tab_active');
-	$(this).siblings().removeClass('tab_active');
-	$('.notice1').hide();
-	$('.notice2').show();
-})
+//s3swiper
+let s3Swiper = new Swiper('.s3 .swiper-container', {
+  autoplay:{
+    delay:4000,
+    disableOnInteraction:false,
+  },
+  loop : true,
+  navigation : {
+    prevEl: '.s3_left .swiper-button-prev',
+    nextEl: '.s3_left .swiper-button-next',
+  },
+  breakpoints:{
+    840 : {slidesPerView: 2, spaceBetween: 30,},
+    1000 : {slidesPerView: 1,}, 
+  },
+});
 
-$('.tab_title>li:nth-child(1)').click(function(){
-	$(this).addClass('tab_active');
-	$(this).siblings().removeClass('tab_active');
-	$('.notice2').hide();
-	$('.notice1').show();
-})
+$('.s3_left .play_btn').hide();
+$('.s3_left .pause_btn').click(function(){
+  $('.s3_left .pause_btn').hide();
+  $('.s3_left .play_btn').show();
+  s3Swiper.autoplay.stop();
+});
+$('.s3_left .play_btn').click(function(){
+  $('.s3_left .play_btn').hide();
+  $('.s3_left .pause_btn').show();
+  s3Swiper.autoplay.start();
+});
 
-$('.site_list').hide();
-$('.family_site>li').mouseover(function(){
-	$(this).children('.site_list').stop().show();
-})
-
-$('.family_site>li').mouseout(function(){
-	$(this).children('.site_list').stop().hide();
-})
+//family
+$('.f_list').hide();
+$('.family').click(function(){
+  $('.f_list').stop().slideToggle();
+});
