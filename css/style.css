@@ -43,7 +43,7 @@ justify-content: flex-end;}
 .sub_list{margin-top: 20px;}
 .sub_list>li{margin-bottom: 40px;}
 .sub_list>li>a{font-size: 18px; font-weight: bold; border-left: 2px solid #000; padding-left: 15px;}
-.sub_list>li:hover>a{color: #1095ce;border-color: #1095ce;}
+.sub_list>li:hover>a{color: #fdc8a5;border-color: #fdc8a5;}
 /* sub_list end */
 
 .lnb{display: flex; position: absolute; top: 60px; right: 0;}
@@ -75,8 +75,9 @@ box-sizing: border-box; padding: 0 30px 0 15px;  font-size: 14px;}
 padding: 6px 9px; border-radius: 10px; display: flex; align-items: center;}
 
 .m_lnb{display: flex; align-items: center;}
-.m_lnb>li:nth-child(1){display: flex; align-items: center;}
-.m_lnb>li:nth-child(1)::after{content: ''; display: block; width: 1px; height: 10px; background: #666; margin: 0 7px;}
+.m_lnb>li{display: flex; align-items: center;}
+.m_lnb>li::after{content: ''; display: block; width: 1px; height: 10px; background: #666; margin: 0 7px;}
+.m_lnb>li:nth-child(3)::after{display: none;}
 
 /* scroll height: 100%; overflow-y: auto; margin-bottom: 170px;*/
 .m_bt{padding: 20px 35px; height: 100%; overflow-y: auto;}
@@ -85,14 +86,14 @@ padding: 6px 9px; border-radius: 10px; display: flex; align-items: center;}
 .m_gnb>li>span{font-weight: bold; line-height: 51px; display: block; display: flex; align-items: center; justify-content: space-between;}
 .m_gnb>li>span::after{content: ''; display: block; width: 17px; height: 17px; border-radius: 4px; background: #efefef url(../images/m_arrow_btn.png) no-repeat center 30%;}
 
-.m_gnb_active{color: #1095ce !important;}
-.m_gnb_active .m_sub{border-top: 2px solid #1095ce !important;}
+.m_gnb_active{color: #fdc8a5 !important;}
+.m_gnb_active .m_sub{border-top: 2px solid #fdc8a5 !important;}
 
 .m_sub{border-top: 1px solid #ddd; padding: 15px 5px;}
 .m_sub>li>a{font-size: 15px; line-height: 2.3; color: #555; display: flex; align-items: center;}
 .m_sub>li>a::before{content: ''; display: block; width: 4px; height: 4px; background: #ddd; border-radius: 100%; margin-right: 15px;}
-.m_sub>li:hover>a{color: #1095ce;}
-.m_sub>li:hover>a::before{background: #1095ce;}
+.m_sub>li:hover>a{color: #fdba8d; font-weight: bold;}
+.m_sub>li:hover>a::before{background: #fdba8d;}
 /* m_menu end */
 /* header end */ 
 
